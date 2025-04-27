@@ -7,6 +7,7 @@ export const useArticles = () => {
     const { data: articles, isLoading, error } = useQuery({
         queryKey: ['articles'],
         queryFn: getArticles,
+        retry: 1,
     });
 
     const { data: getArticlessNotAuth } = useQuery({

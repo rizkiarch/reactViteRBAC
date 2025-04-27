@@ -46,9 +46,11 @@ export default function ArticleCard({ article }) {
             </header>
 
             {/* Article Content */}
-            <article className="prose dark:prose-invert max-w-none mb-8">
-                {article.content}
-            </article>
+            <article
+                className="prose dark:prose-invert max-w-none mb-8"
+                dangerouslySetInnerHTML={{ __html: article.content }}
+            />
+
 
             {/* Article Footer */}
             <div className="border-t border-gray-200 dark:border-gray-800 pt-6">

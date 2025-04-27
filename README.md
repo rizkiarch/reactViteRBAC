@@ -1,12 +1,120 @@
-# React + Vite
+# 📚 Project React + Vite RBAC
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ini adalah project frontend React.js menggunakan Vite, terhubung dengan backend API.  
+Project ini memiliki role akun: Superadmin, Admin, dan User.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Cara Install Project
 
-## Expanding the ESLint configuration
+Ikuti langkah-langkah di bawah ini untuk menjalankan project:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Clone Project
+
+```bash
+git clone https://github.com/username/nama-project.git
+```
+
+Ganti `username/nama-project.git` sesuai alamat repo kamu.
+
+### 2. Masuk ke Folder Project
+
+```bash
+cd nama-project
+```
+
+### 3. Install Dependency
+
+```bash
+npm install
+```
+atau kalau kamu pakai yarn:
+
+```bash
+yarn install
+```
+
+### 4. Setup `.env`
+
+Buat file `.env` di root project.  
+Isi dengan:
+
+```bash
+VITE_API_URL=http://localhost:8000/api
+```
+
+> **Catatan:**  
+> Pastikan backend Laravel API kamu sudah jalan di `http://localhost:8000`.
+
+### 5. Jalankan Project
+
+```bash
+npm run dev
+```
+atau
+
+```bash
+yarn dev
+```
+
+Nanti project akan jalan di `http://localhost:5173` (default port Vite).
+
+---
+
+## 🔐 Akun Login
+
+Berikut akun-akun yang bisa digunakan:
+
+| Role        | Email                      | Password    |
+|-------------|-----------------------------|-------------|
+| Superadmin  | superadmin@example.com       | 123123123   |
+| Admin       | admin@example.com            | 123123123   |
+| User        | user@example.com             | 123123123   |
+
+> **Pastikan** data akun ini sudah tersedia di backend kamu!
+
+---
+
+## 📦 Struktur Penting
+
+- `src/components/` → Komponen React (seperti tombol, card, dll)
+- `src/pages/` → Halaman-halaman seperti Login, Dashboard, dll
+- `src/services/` → Tempat request API (axios)
+- `src/routes/` → Routing aplikasi
+
+---
+
+## ⚡ Tools & Library yang Digunakan
+
+- React.js
+- Vite
+- Axios
+- React Router DOM
+- TailwindCSS (opsional, kalau kamu pakai)
+- Lucide React (icon library)
+
+---
+
+## 💬 FAQ
+
+**Q: Kenapa tidak bisa login?**  
+A: Pastikan API backend sudah running di `localhost:8000`, dan `.env` sudah diisi dengan `VITE_API_URL`.
+
+**Q: Kalau mau ganti API URL gimana?**  
+A: Edit saja file `.env` di root project.
+
+**Q: Saya dapat error CORS?**  
+A: Pastikan backend sudah mengaktifkan CORS.
+
+---
+
+## ✨ Tips Tambahan
+
+- Kalau ganti `.env`, **wajib restart** server Vite (`npm run dev`) supaya env baru terbaca.
+- Kalau ada error `404`, pastikan endpoint API kamu benar.
+
+---
+
+# Selamat coding! 🚀
+
+---
