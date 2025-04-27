@@ -8,21 +8,22 @@ import PermissionManagementPage from './pages/PermissionManagementPage'
 import UserManagement from './pages/UserManagement'
 import ArticleManagement from './pages/ArticleManagement'
 import ProfilePage from './pages/ProfilePage'
+import DashboardPage from './pages/DashboardPage'
 
 export default function App() {
 
   return (
     <Routes>
       <Route path="/" element={<ArticlePage />} />
-      <Route path="/admin/*" element={<AdminDashboard />}>
+      <Route path="/admin/*" element={<DashboardPage />}>
         <Route path="users" element={<UserManagement />} />
         <Route path="articles" element={<ArticleManagement />} />
-        <Route path="roles" element={<UserManagement />} />
+        <Route path="roles" element={<RoleManagementPage />} />
         <Route path="permissions" element={<PermissionManagementPage />} />
       </Route>
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   )
 }

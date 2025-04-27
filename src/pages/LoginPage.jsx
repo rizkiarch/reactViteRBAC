@@ -24,12 +24,14 @@ export default function LoginPage() {
 
     return (
         <>
-            <div className="min-h-screen bg-gray-100">
+            <div className="min-h-screen bg-gray-100 min-w-[1024px]">
                 <Navbar />
-                <div className="container mx-auto py-8 px-4">
-                    <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow">
-                        <h1 className="text-2xl font-bold mb-6">Login</h1>
-                        <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="h-16"></div>
+
+                <div className="container mx-auto py-12 px-8">
+                    <div className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow">
+                        <h1 className="text-3xl font-bold mb-8">Login</h1>
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             <Input
                                 type="email"
                                 placeholder="Email"
@@ -42,9 +44,7 @@ export default function LoginPage() {
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             />
-                            <Button type="submit" className="w-full">
-                                Login
-                            </Button>
+                            <Button type="submit" className="w-full">Login</Button>
                         </form>
                     </div>
                 </div>

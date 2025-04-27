@@ -1,17 +1,11 @@
 import { Link } from 'react-router-dom';
 import { FaUsers, FaFileAlt, FaUserShield, FaKey, FaUser } from 'react-icons/fa';
 
-export default function Sidebar({ isOpen, toggleSidebar }) {
+export default function Sidebar() {
     return (
-        <aside
-            className={`bg-gray-800 text-white fixed top-0 left-0 h-full transition-all duration-300 ${isOpen ? 'w-64' : 'w-0'
-                } md:w-64 md:static z-50 overflow-hidden`}
-        >
-            <div className="p-4 flex justify-between items-center md:hidden">
+        <aside className="bg-gray-800 text-white w-64 h-full">
+            <div className="p-4">
                 <h2 className="text-xl font-bold">Admin Dashboard</h2>
-                <button onClick={toggleSidebar} className="text-white">
-                    ✕
-                </button>
             </div>
             <nav className="mt-4">
                 <Link
