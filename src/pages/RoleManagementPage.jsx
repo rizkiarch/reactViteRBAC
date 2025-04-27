@@ -41,18 +41,18 @@ export default function RoleManagementPage() {
     };
 
     return (
-        <div>
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Role Management</h1>
+        <div className="min-w-[1024px]">
+            <div className="flex justify-between items-center mb-8">
+                <h1 className="text-3xl font-bold">Role Management</h1>
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button>Create Role</Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="bg-white">
                         <DialogHeader>
                             <DialogTitle>Create Role</DialogTitle>
                         </DialogHeader>
-                        <form onSubmit={handleCreateRole} className="space-y-4">
+                        <form onSubmit={handleCreateRole} className="space-y-6">
                             <Input
                                 placeholder="Role Name"
                                 value={formData.name}
@@ -69,9 +69,9 @@ export default function RoleManagementPage() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Role Name</TableHead>
-                            <TableHead>Permissions</TableHead>
-                            <TableHead>Actions</TableHead>
+                            <TableHead className="w-1/3">Role Name</TableHead>
+                            <TableHead className="w-1/3">Permissions</TableHead>
+                            <TableHead className="w-1/3">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -91,11 +91,11 @@ export default function RoleManagementPage() {
                                                 Assign Permission
                                             </Button>
                                         </DialogTrigger>
-                                        <DialogContent>
+                                        <DialogContent className="bg-white">
                                             <DialogHeader>
                                                 <DialogTitle>Assign Permission to {role.name}</DialogTitle>
                                             </DialogHeader>
-                                            <form onSubmit={handleAssignPermission} className="space-y-4">
+                                            <form onSubmit={handleAssignPermission} className="space-y-6">
                                                 <Select
                                                     value={selectedPermission}
                                                     onValueChange={setSelectedPermission}
@@ -103,10 +103,10 @@ export default function RoleManagementPage() {
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Select Permission" />
                                                     </SelectTrigger>
-                                                    <SelectContent>
+                                                    <SelectContent className="bg-white">
                                                         {permissions.map((perm) => (
-                                                            <SelectItem key={perm} value={perm}>
-                                                                {perm}
+                                                            <SelectItem key={perm.id || perm.name} value={perm.name}>
+                                                                {perm.name}
                                                             </SelectItem>
                                                         ))}
                                                     </SelectContent>

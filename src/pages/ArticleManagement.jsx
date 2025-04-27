@@ -49,18 +49,18 @@ export default function ArticleManagement() {
 
     return (
         <>
-            <div>
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-bold">Article Management</h1>
+            <div className="min-w-[1024px]">
+                <div className="flex justify-between items-center mb-8">
+                    <h1 className="text-3xl font-bold">Article Management</h1>
                     <Dialog open={open} onOpenChange={setOpen}>
                         <DialogTrigger asChild>
                             <Button>Create Article</Button>
                         </DialogTrigger>
-                        <DialogContent>
+                        <DialogContent className="bg-white">
                             <DialogHeader>
                                 <DialogTitle>{editArticle ? 'Edit Article' : 'Create Article'}</DialogTitle>
                             </DialogHeader>
-                            <form onSubmit={handleSubmit} className="space-y-4">
+                            <form onSubmit={handleSubmit} className="space-y-6">
                                 <Input
                                     placeholder="Title"
                                     value={formData.title}
@@ -82,9 +82,9 @@ export default function ArticleManagement() {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>Title</TableHead>
-                                <TableHead>Author</TableHead>
-                                <TableHead>Actions</TableHead>
+                                <TableHead className="w-1/3">Title</TableHead>
+                                <TableHead className="w-1/3">Author</TableHead>
+                                <TableHead className="w-1/3">Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -92,7 +92,7 @@ export default function ArticleManagement() {
                                 <TableRow key={article.id}>
                                     <TableCell>{article.title}</TableCell>
                                     <TableCell>{article.user?.name}</TableCell>
-                                    <TableCell className="space-x-2">
+                                    <TableCell className="space-x-4">
                                         <Button variant="outline" onClick={() => handleEdit(article)}>
                                             Edit
                                         </Button>

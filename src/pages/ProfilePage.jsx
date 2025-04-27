@@ -27,12 +27,11 @@ export default function ProfilePage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <Navbar />
-            <div className="container mx-auto py-8 px-4">
-                <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow">
-                    <h1 className="text-2xl font-bold mb-6">Update Profile</h1>
-                    <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="min-h-screen bg-gray-100 min-w-[1024px]">
+            <div className="container mx-auto py-12 px-8">
+                <div className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow">
+                    <h1 className="text-3xl font-bold mb-8">Update Profile</h1>
+                    <form onSubmit={handleSubmit} className="space-y-6">
                         <Input
                             placeholder="Name"
                             value={formData.name}
@@ -50,9 +49,7 @@ export default function ProfilePage() {
                             value={formData.password}
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         />
-                        <Button type="submit" className="w-full">
-                            Update Profile
-                        </Button>
+                        <Button type="submit" className="w-full">Update Profile</Button>
                     </form>
                 </div>
             </div>

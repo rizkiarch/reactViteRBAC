@@ -6,12 +6,19 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Link } from 'react-router-dom';
+import { useRoles } from '../hooks/useRoles';
 
 export default function UserManagement() {
     const { users, isLoading, createUser, updateUser, deleteUser, assignRole } = useUsers();
+    const { roles } = useRoles();
     const [open, setOpen] = useState(false);
     const [editUser, setEditUser] = useState(null);
     const [formData, setFormData] = useState({ name: '', email: '', password: '', role: '' });
+
+    const user = JSON.parse(localStorage.getItem("user"))
+    const userPermissions = user?.roles?.flatMap(role => role.permissions?.map(permission => permission.name)) || []
+
+    const canManageRoles = userPermissions.includes('manage-roles');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -56,12 +63,12 @@ export default function UserManagement() {
         <div>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">User Management</h1>
-                <div className="space-x-2">
+                <div className="space-x-2 bg-white">
                     <Dialog open={open} onOpenChange={setOpen}>
                         <DialogTrigger asChild>
                             <Button>Create User</Button>
                         </DialogTrigger>
-                        <DialogContent>
+                        <DialogContent className="bg-white">
                             <DialogHeader>
                                 <DialogTitle>{editUser ? 'Edit User' : 'Create User'}</DialogTitle>
                             </DialogHeader>
@@ -83,26 +90,28 @@ export default function UserManagement() {
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                 />
-                                <Select
-                                    value={formData.role}
-                                    onValueChange={(value) => setFormData({ ...formData, role: value })}
-                                >
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select Role" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="superadmin">Superadmin</SelectItem>
-                                        <SelectItem value="admin">Admin</SelectItem>
-                                        <SelectItem value="user">User</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                {canManageRoles && (
+                                    <Select
+                                        value={formData.role}
+                                        onValueChange={(value) => setFormData({ ...formData, role: value })}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select Role" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {roles.map((role) => (
+                                                <SelectItem key={role.id} value={role.name}>
+                                                    {role.name}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                )}
                                 <Button type="submit">{editUser ? 'Update' : 'Create'}</Button>
                             </form>
                         </DialogContent>
                     </Dialog>
-                    <Link to="/profile">
-                        <Button variant="outline">Update Profile</Button>
-                    </Link>
+
                 </div>
             </div>
             {isLoading ? (
@@ -130,19 +139,23 @@ export default function UserManagement() {
                                     <Button variant="destructive" onClick={() => handleDelete(user.id)}>
                                         Delete
                                     </Button>
-                                    <Select
-                                        onValueChange={(value) => handleAssignRole(user.id, value)}
-                                        defaultValue={user.roles[0]?.name}
-                                    >
-                                        <SelectTrigger className="w-[120px]">
-                                            <SelectValue placeholder="Assign Role" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="superadmin">Superadmin</SelectItem>
-                                            <SelectItem value="admin">Admin</SelectItem>
-                                            <SelectItem value="user">User</SelectItem>
-                                        </SelectContent>
-                                    </Select>
+                                    {canManageRoles && (
+                                        <Select
+                                            onValueChange={(value) => handleAssignRole(user.id, value)}
+                                            defaultValue={user.roles[0]?.name}
+                                        >
+                                            <SelectTrigger className="w-[120px]">
+                                                <SelectValue placeholder="Assign Role" />
+                                            </SelectTrigger>
+                                            <SelectContent className="!bg-white">
+                                                {roles.map((role) => (
+                                                    <SelectItem key={role.id} value={role.name}>
+                                                        {role.name}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    )}
                                 </TableCell>
                             </TableRow>
                         ))}

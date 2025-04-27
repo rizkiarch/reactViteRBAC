@@ -21,18 +21,18 @@ export default function PermissionManagementPage() {
     };
 
     return (
-        <div>
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Permission Management</h1>
+        <div className="min-w-[1024px]">
+            <div className="flex justify-between items-center mb-8">
+                <h1 className="text-3xl font-bold">Permission Management</h1>
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button>Create Permission</Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="bg-white">
                         <DialogHeader>
                             <DialogTitle>Create Permission</DialogTitle>
                         </DialogHeader>
-                        <form onSubmit={handleCreatePermission} className="space-y-4">
+                        <form onSubmit={handleCreatePermission} className="space-y-6">
                             <Input
                                 placeholder="Permission Name"
                                 value={formData.name}
@@ -54,8 +54,8 @@ export default function PermissionManagementPage() {
                     </TableHeader>
                     <TableBody>
                         {permissions.map((perm) => (
-                            <TableRow key={perm}>
-                                <TableCell>{perm}</TableCell>
+                            <TableRow key={perm.id || perm.name}>
+                                <TableCell>{perm.name}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
